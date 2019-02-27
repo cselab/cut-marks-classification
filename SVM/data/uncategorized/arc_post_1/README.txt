@@ -1,1 +1,0 @@
-post processed figures with mean 0 and variance 1.

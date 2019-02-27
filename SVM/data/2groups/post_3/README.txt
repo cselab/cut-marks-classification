@@ -1,0 +1,1 @@
+post processed figures with mean 0 and variance 1 and same resolution.

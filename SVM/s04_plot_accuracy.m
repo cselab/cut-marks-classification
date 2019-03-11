@@ -1,10 +1,9 @@
-% First run 02_mean_svm_classification.m
+% Plots the accuracy results obtained from running 02_mean_svm_test_classification.m
+%
+% author: George Arampatzis (garampat@ethz.ch)
 
 clear
 
-% data1=load('data_surf_400_a.mat');
-% data2=load('data_surf_400_b.mat');
-% accuracy = [ data1.accuracy ; data2.accuracy];
 
 data1=load('data_SURF_600.mat');
 accuracy = [ data1.accuracy ];
@@ -15,30 +14,26 @@ accuracy = [ data1.accuracy ];
 acc = mean(accuracy,2);
 
 
+%%
 figure(1); clf
-plot(accuracy,'-o')
-legend(string(data1.categories(1)),string(data1.categories(2)))
+p = plot(accuracy,'-o','LineWidth',3,'MarkerSize',10);
+l=legend( string(data1.categories(1)), string(data1.categories(2)) );
+l.Location = 'best';
 grid on
+set(gca,'FontSize',18)
+xlabel('# run')
+ylabel('accuracy')
 
+
+%%
 figure(2); clf
-plot(cumsum(accuracy)./repmat((1:length(accuracy))',1,2),'-o'); hold on
-plot(cumsum(acc)./(1:length(acc))','-o')
-legend(string(data1.categories(1)),string(data1.categories(2)),'total')
+plot( cumsum(accuracy)./repmat((1:length(accuracy))',1,2),'-o','LineWidth',3,'MarkerSize',10); 
+hold on
+plot( cumsum(acc)./(1:length(acc))','-o','LineWidth',3,'MarkerSize',10 )
+l = legend(string(data1.categories(1)),string(data1.categories(2)),'total');
+l.Location = 'best';
 grid on
-
-
-
-[ mean(100*accuracy(:,1)) std(100*accuracy(:,1)); mean(100*accuracy(:,2)) std(100*accuracy(:,2)); mean(100*acc) std(100*acc)]
-
-figure(3); clf
-subplot(1,3,1)
-histogram(accuracy(:,1),20)
-title(string(data1.categories(1)))
-
-subplot(1,3,2)
-histogram(accuracy(:,2),20)
-title(string(data1.categories(2)))
-
-subplot(1,3,3)
-histogram(acc,20)
-title('total')
+set(gca,'FontSize',18)
+xlabel('# run')
+ylabel('running mean accuracy')
+axis tight

@@ -1,3 +1,6 @@
+% this is the Matlab bagOfFeatures internal function. Minor modifications
+% have beem made
+
 %bof Create bag of visual features.
 %   bag = bof(imds) returns a bag of visual features. imds is
 %   an ImageDatastore object. By default, SURF features are used to

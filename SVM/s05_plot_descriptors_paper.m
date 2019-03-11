@@ -1,11 +1,16 @@
-% First run 03_svm_test_classification.m with train_ratio
+% First run 03_svm_test_classification.m with train_ratio=0.01
+%
+%
+% author: George Arampatzis (garampat@ethz.ch)
 
-clear;
+
+
+clears
 clc
 
 addpath(genpath('./functions/'))
 
-% load for_plot_2.mat
+load for_plot.mat
 
 imFolder = 'data/2groups/';
 
@@ -36,8 +41,6 @@ bag_all = bof(imds, 'VocabularySize',vocSize, 'PointSelection','Detector', 'Verb
 for i=1:length(ind)
     showsurf_points_features( imds, bag_all, ind(i), 40, 0, color, imFolder );
 end
-
-
 
 
 %%
@@ -107,7 +110,7 @@ function showsurf_points_features( imds, bag, k, Nstrong, Nf, color, imFolder )
     
     imshow(img); hold on;
 
-    fig.Position = [506 1 862 954];
+%     fig.Position = [506 1 862 954];
     
 %     t=title( [ char(imds.Labels(k)) '  ' num2str(k)] );
 %     t.FontSize=22; t.FontName='Times';

@@ -1,13 +1,15 @@
-
-% Use the complete dataset for training. Use the classifier on unlabeled
-% data.
+% This sript uses the complete dataset for training the SVM classifier
+% Use the classifier on unlabeled data.
+%
+% author: George Arampatzis (garampat@ethz.ch)
 
 clear;
 addpath(genpath('./functions/'))
 setDir = './data/2groups/post_1/';
+
 vocSize = 600;
 verbose = 1;
-pcrtFtr = 0.8;
+pcrtFtr = 1;
 
 % Load image data
 imds = imageDatastore(setDir,'IncludeSubfolders',true,'LabelSource','foldernames');
@@ -19,6 +21,7 @@ trainSet = imds;
 
 %% Create Visual Vocabulary 
 fprintf('\nCreating Vocabulary of size %d \n\n',vocSize);
+
 bag = bagOfFeatures(trainSet,...
                     'VocabularySize', vocSize,...
                     'PointSelection','Detector',...
@@ -42,7 +45,7 @@ trainData.categories = categories;
 
 
 %% Train classifier
-% classificationLearner; return;
+
 fprintf('Training the classifier... ')
 [ Classifier, ~ ] = trainClassifier(trainData, 'Verbose', verbose);
 % [ Classifier, ~ ] = trainClassifier_CMA(trainData, 'Verbose', false);

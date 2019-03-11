@@ -1,11 +1,13 @@
-% Train the classifier on a portion of the available data. Test accuracy on
-% the remainind data.
+% This sript uses a portion of the available data for training the SVM classifier
+% The accuracy is tested on the remainind data.
+% The mean accuracy is estimated on several runs
 %
-% Take the mean over many runs
+% author: George Arampatzis (garampat@ethz.ch)
+
 
 clear; clc
 addpath(genpath('./functions/'))
-setDir = './data/2groups/post_2/';
+setDir = './data/2groups/post_1/';
 vocSize = 400;
 trainRatio = 10;
 verbose = 1;
@@ -42,7 +44,8 @@ for i = 1:Ns
     [ Classifier, ~ ] = trainClassifier(trainData, 'Verbose', verbose );
 %     [ Classifier, ~ ] = trainClassifier_CMA(trainData, 'Verbose', false);
 
-    %% Test classifier 
+    
+  %% Test classifier 
     word = double( encode(bag, testSet, 'Verbose',false));
     testData = struct();
     testData.X = array2table( word );
@@ -58,11 +61,11 @@ for i = 1:Ns
         accuracy(i,j) = sum( label(ind) == testData.Y(ind) )/sz;
     end
     
-    acc(i) = mean(accuracy(i,:));
+    acc(i) = mean( accuracy(i,:) );
     
     fprintf('\n Mean accuracy: %.2f   with std: %.2f \n\n',mean(100*acc(1:i)) , std(100*acc(1:i)))
     
-    save('data_post2.mat')
+    save('data_post.mat')
     
 end
 

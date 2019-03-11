@@ -1,13 +1,16 @@
-% Train the classifier on a portion of the available data. Test accuracy on
-% the remainind data.
+% This sript uses a portion of the available data for training the SVM classifier
+% The accuracy is tested on the remainind data.
+% 
+%
+% author: George Arampatzis (garampat@ethz.ch)
 
 clear; clc
 
 addpath(genpath('./functions/'))
 
-setDir = './data/2groups/post_1_1/';
+setDir = './data/2groups/post_1/';
 vocSize = 400;
-trainRatio = 0;
+trainRatio = 0.9;
 verbose = 1;
 
 % Load image data
@@ -110,4 +113,4 @@ end
 
 
 
-save('tmp.mat');
+save('for_plot.mat');
